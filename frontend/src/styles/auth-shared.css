@@ -1,0 +1,29 @@
+@import './auth.css';
+
+.role-choice-links {
+  display: grid;
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.role-choice-links a {
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  padding: 14px 16px;
+  color: var(--color-text);
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: border-color 160ms ease, color 160ms ease;
+}
+
+.role-choice-links a:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+.auth-message {
+  margin: 0;
+  color: var(--color-accent);
+  font-size: 13px;
+}
