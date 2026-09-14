@@ -22,5 +22,5 @@ const foodSchema = new mongoose.Schema({
     }
 })
 
-const foodModel = mongoose.mongo.model("food", foodSchema)
+const foodModel = mongoose.model("food", foodSchema)
 module.exports = foodModel

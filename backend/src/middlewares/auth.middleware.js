@@ -1,10 +1,11 @@
 const { decode } = require('node:punycode')
 const foodPartnerModel = require('../models/foodPartner.model.js')
+const userModel = require('../models/user.model.js')
 const jwt = require('jsonwebtoken')
 
 
 async function authFoodPartnerMiddleware(req, res, next) {
-    const token = request.cookies.token
+    const token = req.cookies.token
     if (!token) {
         return res.status(401).json({
             message: "Unauthorized access"
@@ -14,7 +15,7 @@ async function authFoodPartnerMiddleware(req, res, next) {
     try {
         const decoded = jwt.verify(token, process.env.JWT_SECRET)
 
-        const foodPartner = await foodPartner.findOne(decoded.id)
+        const foodPartner = await foodPartnerModel.findOne(decoded.id)
         req.foodPartner = foodPartner
         next()
 
@@ -25,6 +26,30 @@ async function authFoodPartnerMiddleware(req, res, next) {
     }
 }
 
+async function authUserMiddleware(req, res, next) {
+    const token = req.cookies.token
+
+    if (!token) {
+        return res.status(401).json({
+            message: "UNAUTHORIZED access / Please login first"
+        })
+    }
+
+    try {
+        const decoded = jwt.verify(token, process.env.JWT_SECRET)
+        const user = await userModel.findOneAndDelete(decoded.id)
+
+        res.user = user
+
+        next()
+    } catch (error) {
+        return res.status(401).json({
+            message: "Invalid token"
+        })
+    }
+}
+
 module.exports = {
-    authFoodPartnerMiddleware
+    authFoodPartnerMiddleware,
+    authUserMiddleware
 }
