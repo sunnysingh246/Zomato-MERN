@@ -8,7 +8,7 @@ const UserRegister = () => {
 	const [form, setForm] = useState({ fullName: '', email: '', password: '', confirmPassword: '' })
 	const [message, setMessage] = useState('')
 
-	const handleChange = (event) => {
+	const handleChange = async (event) => {
 		setForm({ ...form, [event.target.name]: event.target.value })
 	}
 
@@ -22,15 +22,19 @@ const UserRegister = () => {
 		}
 
 		try {
-			await axios.post('http://localhost:3000/api/auth/user/register', {
+			const response = await axios.post('http://localhost:3000/api/auth/user/register', {
 				fullName: form.fullName,
 				email: form.email,
 				password: form.password,
+			}, {
+				withCredentials: true
 			})
 			navigate('/user/login')
 		} catch (error) {
 			setMessage(error.response?.data?.message || 'Unable to create your account. Please try again.')
 		}
+
+		console.log(response.data)
 	}
 
 
