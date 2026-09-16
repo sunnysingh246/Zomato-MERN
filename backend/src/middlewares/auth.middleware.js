@@ -1,4 +1,3 @@
-const { decode } = require('node:punycode')
 const foodPartnerModel = require('../models/foodPartner.model.js')
 const userModel = require('../models/user.model.js')
 const jwt = require('jsonwebtoken')
@@ -15,7 +14,7 @@ async function authFoodPartnerMiddleware(req, res, next) {
     try {
         const decoded = jwt.verify(token, process.env.JWT_SECRET)
 
-        const foodPartner = await foodPartnerModel.findOne(decoded.id)
+        const foodPartner = await foodPartnerModel.findById(decoded.id)
         req.foodPartner = foodPartner
         next()
 
@@ -37,9 +36,9 @@ async function authUserMiddleware(req, res, next) {
 
     try {
         const decoded = jwt.verify(token, process.env.JWT_SECRET)
-        const user = await userModel.findOneAndDelete(decoded.id)
+        const user = await userModel.findById(decoded.id)
 
-        res.user = user
+        req.user = user
 
         next()
     } catch (error) {

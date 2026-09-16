@@ -17,8 +17,10 @@ const FoodPartnerLogin = () => {
 		setMessage('')
 
 		try {
-			await axios.post('http://localhost:3000/api/auth/foodPartner/login', form)
-			navigate('/')
+			await axios.post('http://localhost:3000/api/auth/foodPartner/login', form, {
+				withCredentials: true
+			})
+			navigate('/create-food')
 		} catch (error) {
 			setMessage(error.response?.data?.message || 'Unable to sign in. Please try again.')
 		}

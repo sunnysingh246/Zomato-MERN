@@ -17,7 +17,9 @@ const UserLogin = () => {
 		setMessage('')
 
 		try {
-			await axios.post('http://localhost:3000/api/auth/user/login', form)
+			await axios.post('http://localhost:3000/api/auth/user/login', form, {
+				withCredentials: true
+			})
 			navigate('/')
 		} catch (error) {
 			setMessage(error.response?.data?.message || 'Unable to sign in. Please try again.')

@@ -29,8 +29,10 @@ const FoodPartnerRegister = () => {
 				businessAddress: form.businessAddress,
 				email: form.email,
 				password: form.password,
+			}, {
+				withCredentials: true
 			})
-			navigate('/food-partner/login')
+			navigate('/create-food')
 		} catch (error) {
 			setMessage(error.response?.data?.message || 'Unable to create your account. Please try again.')
 		}
