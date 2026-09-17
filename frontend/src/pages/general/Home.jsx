@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
+import ThemeToggle from '../../components/ThemeToggle'
 import './Home.css'
 
 const Home = () => {
@@ -51,7 +52,10 @@ const Home = () => {
 		<main className="reels-page">
 			<header className="reels-header">
 				<Link className="reels-brand" to="/">zomato</Link>
-				<Link className="reels-account" to="/user/login">Sign in</Link>
+				<div className="reels-actions">
+					<ThemeToggle />
+					<Link className="reels-account" to="/user/login">Sign in</Link>
+				</div>
 			</header>
 
 			{message && (

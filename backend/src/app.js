@@ -6,10 +6,13 @@ const foodRouter = require('./routes/food.routes.js')
 
 const app = express()
 app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
 app.use(cookieParser())
 app.use(cors({
-    origin: "http://localhost5173",
-    credentials: true
+    origin: 'http://localhost:5173',
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization']
 }))
 
 app.get('/', (req, res) => {

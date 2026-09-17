@@ -34,7 +34,8 @@ const FoodPartnerRegister = () => {
 			})
 			navigate('/create-food')
 		} catch (error) {
-			setMessage(error.response?.data?.message || 'Unable to create your account. Please try again.')
+			const backendMessage = error.response?.data?.message
+			setMessage(backendMessage || 'Unable to create your account. Please try again.')
 		}
 	}
 

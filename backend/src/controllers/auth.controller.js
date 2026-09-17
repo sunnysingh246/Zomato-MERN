@@ -26,10 +26,10 @@ async function registerUser(req, res) {
         id: user._id
     }, process.env.JWT_SECRET)
 
-    res.cookie("token", token)
+    res.cookie('token', token, { httpOnly: true, sameSite: 'lax' })
 
     res.status(200).json({
-        message: "User registered successfully",
+        message: 'User registered successfully',
         user: {
             _id: user._id,
             email: user.email,
@@ -60,10 +60,10 @@ async function loginUser(req, res) {
         id: user._id
     }, process.env.JWT_SECRET)
 
-    res.cookie("token", token)
+    res.cookie('token', token, { httpOnly: true, sameSite: 'lax' })
 
     res.status(200).json({
-        message: "User logged in sucessfully",
+        message: 'User logged in successfully',
         user: {
             _id: user._id,
             email: user.email,
@@ -73,9 +73,8 @@ async function loginUser(req, res) {
 }
 
 async function logoutUser(req, res) {
-    res.cookie("token")
-    res.status(200).json({ message: "User logout successfully" })
-
+    res.clearCookie('token')
+    res.status(200).json({ message: 'User logout successfully' })
 }
 
 async function registerFoodPartner(req, res) {
@@ -85,7 +84,7 @@ async function registerFoodPartner(req, res) {
 
     if (isAccountAlreadyExists) {
         return res.status(400).json({
-            message: "Food partner account already exists"
+            message: 'Food partner account already exists'
         })
     }
 
@@ -104,18 +103,17 @@ async function registerFoodPartner(req, res) {
         id: foodPartner._id
     }, process.env.JWT_SECRET)
 
-    res.cookie("token", token)
+    res.cookie('token', token, { httpOnly: true, sameSite: 'lax' })
 
     res.status(201).json({
-        message: "Food partner registered successfull",
+        message: 'Food partner registered successfully',
         foodPartner: {
             _id: foodPartner._id,
-            email: foodPartner,
+            email: foodPartner.email,
             name: foodPartner.name,
-
+            businessName: foodPartner.businessName
         }
     })
-
 }
 
 async function loginFoodPartner(req, res) {
@@ -125,7 +123,7 @@ async function loginFoodPartner(req, res) {
 
     if (!isFoodPartnerExists) {
         return res.status(400).json({
-            message: "Invalid credential"
+            message: 'Invalid credential'
         })
     }
 
@@ -133,7 +131,7 @@ async function loginFoodPartner(req, res) {
 
     if (!isValidPassword) {
         return res.status(400).json({
-            message: "Invalid credential"
+            message: 'Invalid credential'
         })
     }
 
@@ -141,10 +139,10 @@ async function loginFoodPartner(req, res) {
         id: isFoodPartnerExists._id
     }, process.env.JWT_SECRET)
 
-    res.cookie("Token", token)
+    res.cookie('token', token, { httpOnly: true, sameSite: 'lax' })
 
     res.status(200).json({
-        message: "Food partner regstered successfully",
+        message: 'Food partner logged in successfully',
         foodPartner: {
             _id: isFoodPartnerExists._id,
             email: isFoodPartnerExists.email,
@@ -157,10 +155,10 @@ async function loginFoodPartner(req, res) {
 }
 
 function logoutFoodPartner(req, res) {
-    res.clearCookie("token"),
-        res.status(400).json({
-            message: "Food partner loggedOut successfully "
-        })
+    res.clearCookie('token')
+    res.status(200).json({
+        message: 'Food partner loggedOut successfully'
+    })
 }
 
 module.exports = {

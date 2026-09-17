@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import ThemeToggle from '../../components/ThemeToggle'
 
 const AuthLayout = ({ children, role, mode, title, description }) => {
   const basePath = role === 'user' ? '/user' : '/food-partner'
@@ -7,10 +8,14 @@ const AuthLayout = ({ children, role, mode, title, description }) => {
 
   return (
     <main className="auth-shell">
+      <div className="theme-header">
+        <Link className="auth-brand" to="/">zomato</Link>
+        <ThemeToggle />
+      </div>
+
       <section className="auth-panel">
         <div className="auth-card">
           <div className="auth-heading">
-            <Link className="auth-brand" to="/">zomato</Link>
             <p className="form-kicker">{roleLabel}</p>
             <h2>{title}</h2>
             <p>{description}</p>

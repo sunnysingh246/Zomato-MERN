@@ -1,41 +1,32 @@
 const mongoose = require('mongoose')
-const { type } = require('node:os')
 
 const foodPartnerSchema = new mongoose.Schema({
-
     name: {
         type: String,
-        required: true,
+        required: true
     },
-
     businessName: {
         type: String,
         required: true
     },
-
     contactNumber: {
         type: Number,
         required: true
     },
-
     email: {
         type: String,
         required: true,
         unique: true
     },
-
     businessAddress: {
         type: String,
-        required: true,
+        required: true
     },
-
     password: {
         type: String,
-        required: true,
+        required: true
     }
-
 })
 
-
-const foodPartnerModel = mongoose.model("foodPartner", foodPartnerSchema)
+const foodPartnerModel = mongoose.model('foodPartner', foodPartnerSchema)
 module.exports = foodPartnerModel

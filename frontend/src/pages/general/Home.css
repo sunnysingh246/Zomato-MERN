@@ -1,8 +1,8 @@
 .reels-page {
   height: 100dvh;
   overflow: hidden;
-  background: #111111;
-  color: #ffffff;
+  background: var(--color-background);
+  color: var(--color-text);
 }
 
 .reels-header {
@@ -53,7 +53,7 @@
   overflow: hidden;
   scroll-snap-align: start;
   scroll-snap-stop: always;
-  background: #222222;
+  background: var(--color-surface-muted);
 }
 
 .reel-video {
@@ -89,6 +89,7 @@
 
 .reel-name {
   margin: 0 0 8px;
+  color: #ffffff;
   font-size: 20px;
   font-weight: 700;
 }
@@ -137,12 +138,12 @@
 }
 
 .reels-message a {
-  color: #ffffff;
+  color: var(--color-text);
   font-weight: 700;
 }
 
 .reels-empty {
-  color: rgba(255, 255, 255, 0.75);
+  color: var(--color-text-muted);
 }
 
 @media (max-width: 560px) {
